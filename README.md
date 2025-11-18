@@ -78,18 +78,114 @@ Key Features
 
 Each workflow run generates:
 
-Final risk score
+            Final risk score
+            
+            Triggered rules
+            
+            Rationale + model outputs
+            
+            Provenance
+            
+            Human/agent review logs
 
-Triggered rules
+# Opus Workflow Architecture
+# 1. Intake Stage
 
-Rationale + model outputs
+            Nodes:
+            
+            Multi-Format Input Node
+            
+            Data Import Node (Public API)
+            
+            Parallel Split →
+            
+            Branch A: Text Extraction
+            
+            Branch B: Image Analysis
+            
+            Branch C: Metadata / Claims
 
-Provenance
+# 2. Understand Stage
 
-Human/agent review logs
+            OCR
+            
+            AI-likelihood Agent
+            
+            Linguistic anomaly Agent
+            
+            Image detection Agent
+            
+            Claim check Agent
+            
+            Metadata rules (Python)
+            
+            Aggregator Node → understanding_bundle
 
-External API details
+# 3. Decide Stage
 
-Audit JSON (and optional audit PDF)
+            Deterministic Rules Engine (Python)
+            
+            Scoring Engine (Python)
+            
+            Decision Node (Auto Approve / Agent Review / Human Review)
 
-Repository Structure
+# 4. Review Stage
+
+            Agentic Policy Review
+            
+            Human Review Node (override supported)
+
+# 5. Deliver Stage
+
+            Audit JSON Generator (Python)
+            
+            Send to: Google Sheets / Email / JSON Export
+
+# How to Use
+1. Upload Prompts to Opus
+
+            In each Agent Node, attach the matching .txt file from the /prompts folder.
+
+2. Attach Configs to Python Nodes
+
+            Upload scoring_engine.py into the scoring Python node
+            
+            Upload deterministic_evaluator.py into deterministic rules node
+            
+            Upload metadata_rules.py for metadata checks
+            
+            Upload audit_json_generator.py for audit output
+
+3. Build Nodes in Opus
+
+            Follow the included PDF in /docs/instructions.pdf which contains:
+            
+            Node-by-node wiring
+            
+            Input/output mapping
+            
+            Parallel branches
+            
+            Review flow
+            
+            Delivery setup
+
+4. Test with Sample Data
+
+            Use files from /data/examples to test:
+            
+            Text
+            
+            Images
+            
+            Mixed-media inputs
+
+5. Export Audit Results
+
+            Final step:
+            
+            audit.json
+            
+            delivered to email/sheets
+            
+            final risk score + verdict
