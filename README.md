@@ -1,83 +1,91 @@
-AI-Genesis-Hackathon-Project
-OPUS Workflow Automation
-Overview!
-(https://github.com/user-attachments/assets/b73b50e9-022a-413c-b1e9-2b7decbe6275)
+✅ README.md — Slop Detector: Cross-Media AI, Misinformation & Manipulation Detection
+Overview
 
+Slop Detector is a full end-to-end Intake → Understand → Decide → Review → Deliver automation built using Opus, designed to detect:
 
-This repository contains a complete OPUS workflow for multi-format data ingestion, text and image analysis, metadata and claim verification, risk scoring, and automated decision routing. The workflow integrates external data and supports automated, agentic, and human review paths. All prompts, configuration files, scripts, and workflow details are included.
-Workflow Structure
+            AI-generated text
+            
+            Misinformation
+            
+            Manipulated images
+            
+            Linguistic anomalies
+            
+            Missing or fabricated metadata
+            
+            High-risk signals (virality, contradictions, low confidence, manipulation patterns)
 
-    Multi-Format Intake
+The system processes text, images, PDFs, and JSON, along with public API data, and produces a structured audit artifact with full transparency across all decisions.
 
-Node Type: Input Node
+The workflow is reusable for industries such as:
 
-Fields: raw_text (string), raw_image (file), raw_file (file), raw_json (JSON)
+Social media verification (Instagram Reels, TikTok, Twitter/X)
+            
+            Newsroom content validation
+            
+            Document fraud detection
+            
+            Compliance and risk
+            
+            Content authenticity screening
 
-    Data Import
+Key Features
+✔ Multi-Format Intake
+            
+            Accepts:
+            
+            PDFs
+            
+            Images
+            
+            Text
+            
+            JSON records
+            
+            Public API data
 
-Node Type: Data Import
+✔ Modular AI Pipeline
 
-Input: Public API / mock JSON
+        Includes specialized Agents for:
+        
+        AI-likelihood detection
+        
+        Linguistic anomaly detection
+        
+        Image manipulation / AI generation
+        
+        Claim extraction
+        
+        Metadata validation
 
-Output: external_data
+✔ Deterministic + AI Decisioning
 
-    Parallel Processing
+            Combination of:
+            
+            Threshold rules
+            
+            Weighted scoring engine
+            
+            Human-review fallback
+            
+            Agentic policy review
 
-Branches:
+✔ Full Audit & Traceability
 
-A — Text Extraction
+Each workflow run generates:
 
-OCR/Text Extraction → extracted_text
+Final risk score
 
-AI Likelihood Analysis → ai_likelihood_output
+Triggered rules
 
-Linguistic Anomaly Analysis → linguistic_output
+Rationale + model outputs
 
-B — Image Analysis
+Provenance
 
-OCR/Image-to-Text → image_text
+Human/agent review logs
 
-Image Detection → image_ai_output
+External API details
 
-C — Metadata & Claims
+Audit JSON (and optional audit PDF)
 
-Claim Verification → claims
-
-Metadata Rule Engine → metadata_flags
-
-    Aggregation
-
-Node Type: Aggregator
-
-Input: Outputs from all branches + external data
-
-Output: understanding_bundle
-
-    Decision Stage
-
-Deterministic Rules Engine → rule_flags
-
-Scoring Engine → final_risk_score
-
-Risk Routing Decision Node: routes items to human review, agentic review, or auto-delivery based on conditions.
-
-    Review Stage
-
-Agentic Review → agentic_review_output
-
-Human Review Fields: decision, reviewer_comment, timestamp, override (yes/no)
-
-    Delivery Stage
-
-Audit JSON Generation → final_risk_score (audited)
-
-Delivery Options: Google Sheets, Email, JSON Export → final_deliver
-Usage
-
-Ingest multi-format files (text, images, JSON, files) via the input nodes.
-
-Workflow executes parallel processing, decision routing, and review stages automatically.
-
-Review results through delivery outputs, either automatically or via agentic/human review.
-
-Audit JSON files provide full traceability of decisions and scoring.
+Repository Structure
