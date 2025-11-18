@@ -1,0 +1,18 @@
+❗ CONDITION 1 — Missing Metadata
+    IF metadata_flags.missing_fields == true
+    ROUTE → HUMAN REVIEW
+
+
+
+❗ CONDITION 2 — High Risk
+    IF final_risk_score >= thresholds.high_risk
+    ROUTE → HUMAN REVIEW
+
+
+❗ CONDITION 3 — Medium Risk
+    IF final_risk_score >= thresholds.medium_risk
+    ROUTE → AGENTIC REVIEW
+
+❗ CONDITION 4 — Auto Approve
+    ELSE → AUTO APPROVE
+

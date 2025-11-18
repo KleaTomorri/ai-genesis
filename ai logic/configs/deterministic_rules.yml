@@ -1,0 +1,96 @@
+# deterministic_rules.yml
+# Rules for Decision nodes. Conditions use variables produced by agent nodes and aggregator.
+# Variables expected:
+#  - text_length (int)
+#  - ocr_confidence (0-1)
+#  - ai_likelihood (0-1)
+#  - ai_confidence (0-1)
+#  - image_ai_likelihood (0-1)
+#  - misinformation_risk (0-1)
+#  - manipulation_likelihood (0-1)
+#  - fact_check_false_count (int)
+#  - missing_metadata_count (int)
+#  - virality_score (0-1)
+#  - model_overall_confidence (0-1)
+#  - metadata_score (0-1)
+#  - policy_flag (boolean)  # set by Agentic Policy Review if it finds policy issues
+
+rules:
+  - id: R01_COMPLETENESS_CHECK
+    desc: "Reject or route to human review if text too short or OCR failed"
+    condition: "text_length < thresholds.min_text_length OR ocr_confidence < thresholds.min_ocr_confidence"
+    action: 
+      - route: human_review
+      - reason: "insufficient_text_or_low_ocr_confidence"
+
+  - id: R02_AUTO_HIGH_AI_FLAG
+    desc: "Auto-classify as AI-generated when AI score is very high and agent confidence strong"
+    condition: "ai_likelihood >= thresholds.auto_ai_likelihood AND ai_confidence >= thresholds.auto_confidence"
+    action:
+      - set: final_verdict = 'AI_GENERATED'
+      - set: decision_path = 'auto'
+      - route: deliver
+      - reason: "high_ai_score_auto_flag"
+
+  - id: R03_AUTO_HUMAN_WRITTEN
+    desc: "Auto-classify as Human-written when AI likelihood is low and misinfo risk is low"
+    condition: "ai_likelihood <= thresholds.auto_human_likelihood AND misinformation_risk <= thresholds.low_misinfo_threshold"
+    action:
+      - set: final_verdict = 'HUMAN_WRITTEN'
+      - set: decision_path = 'auto'
+      - route: deliver
+      - reason: "low_ai_low_misinfo_auto_accept"
+
+  - id: R04_NEEDS_HUMAN_REVIEW_BAND
+    desc: "Borderline AI likelihood or contradictory signals -> human review"
+    condition: "(ai_likelihood > thresholds.human_review_lower AND ai_likelihood < thresholds.human_review_upper) OR (misinformation_risk >= thresholds.misinfo_review_threshold) OR (manipulation_likelihood >= thresholds.manipulation_review_threshold)"
+    action:
+      - route: human_review
+      - reason: "borderline_ai_or_misinfo_or_manipulation"
+
+  - id: R05_FACTCHECK_FAILURE_ESCALATE
+    desc: "If any conclusive false fact-checks, escalate to human review and mark high risk"
+    condition: "fact_check_false_count >= thresholds.fact_check_false_count"
+    action:
+      - route: human_review
+      - set: priority = 'high'
+      - reason: "fact_check_failed"
+
+  - id: R06_METADATA_MISSING_ESCALATE
+    desc: "Missing critical metadata fields triggers human review"
+    condition: "missing_metadata_count >= thresholds.missing_metadata_count"
+    action:
+      - route: human_review
+      - reason: "missing_metadata"
+
+  - id: R07_VIRALITY_ESCALATION
+    desc: "High virality for harmful/AI content increases priority and forces review"
+    condition: "virality_score >= thresholds.virality_high AND risk_estimate >= thresholds.high_risk_threshold"
+    action:
+      - set: priority = 'high'
+      - route: human_review
+      - reason: "high_virality_and_high_risk"
+
+  - id: R08_AGENTIC_POLICY_OVERRIDE
+    desc: "Agentic policy review can force review or reject"
+    condition: "policy_flag == true"
+    action:
+      - route: human_review
+      - set: reason = 'policy_violation_flagged'
+
+  - id: R09_LOW_CONFIDENCE_FALLBACK
+    desc: "Low model confidence: route to human review"
+    condition: "model_overall_confidence < thresholds.min_model_confidence"
+    action:
+      - route: human_review
+      - reason: "low_model_confidence"
+
+  - id: R10_COMPOSITE_AUTO_REJECT
+    desc: "Automatic reject (deliver as 'REJECTED') only for combined extreme cases"
+    condition: "ai_likelihood >= thresholds.auto_reject_ai AND misinformation_risk >= thresholds.auto_reject_misinfo"
+    action:
+      - set: final_verdict = 'REJECTED'
+      - set: decision_path = 'auto_reject'
+      - route: deliver
+      - reason: "auto_reject_combination"
+
