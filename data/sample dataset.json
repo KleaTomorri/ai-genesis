@@ -1,0 +1,159 @@
+[
+  {
+    "id": "s001",
+    "type": "text",
+    "text": "Technology continues to evolve rapidly, creating opportunities across industries...",
+    "metadata": {"url": null, "timestamp": null, "author": null, "language": "en"},
+    "label": "AI_generated"
+  },
+  {
+    "id": "s002",
+    "type": "text",
+    "text": "I was going to the bakery when I noticed a huge fire behind the apartment building...",
+    "metadata": {"url": null, "timestamp": "2024-02-01", "author": "John", "language": "en"},
+    "label": "human_written"
+  },
+  {
+    "id": "s003",
+    "type": "text",
+    "text": "BREAKING: NASA confirms aliens landed in Nevada. Sources say...",
+    "metadata": {"url": "http://fake-news.com", "timestamp": null, "author": null, "language": "en"},
+    "label": "misinformation"
+  },
+
+  {
+    "id": "s004",
+    "type": "text",
+    "text": "The new policy adjustments will facilitate operational efficiency in workforce alignment.",
+    "metadata": {"url": null, "timestamp": null, "author": null, "language": "en"},
+    "label": "borderline_ai"
+  },
+
+  {
+    "id": "s005",
+    "type": "image",
+    "image_url": "test/image/manipulated_1.png",
+    "metadata": {"timestamp": "2024-01-11", "language": "en"},
+    "label": "manipulated_image"
+  },
+
+  {
+    "id": "s006",
+    "type": "image",
+    "image_url": "test/image/human_photo.png",
+    "metadata": {"timestamp": "2024-01-01"},
+    "label": "real_image"
+  },
+
+  {
+    "id": "s007",
+    "type": "text",
+    "text": "The unemployment rate in Germany fell to 2.9% in 2023...",
+    "metadata": {"url": "https://eurostat.eu", "timestamp": "2023", "language": "en"},
+    "label": "true_factual"
+  },
+
+  {
+    "id": "s008",
+    "type": "text",
+    "text": "Germany unemployment is now 0.2% — lowest in world history!",
+    "metadata": {"url": "http://fake-source.biz", "timestamp": null, "language": "en"},
+    "label": "false_fact"
+  },
+
+  {
+    "id": "s009",
+    "type": "text",
+    "text": "Multiple residents reported strange bright lights over Skopje last night...",
+    "metadata": {"url": null, "timestamp": null, "language": "al"},
+    "label": "unverified"
+  },
+
+  {
+    "id": "s010",
+    "type": "text",
+    "text": "Breaking: Microsoft buys OpenAI for 2 trillion dollars!",
+    "metadata": {"url": null, "timestamp": null},
+    "label": "satire"
+  },
+
+  {
+    "id": "s011",
+    "type": "text",
+    "text": "",
+    "metadata": {"url": null},
+    "label": "empty_text"
+  },
+
+  {
+    "id": "s012",
+    "type": "text",
+    "text": "This is the kind of innovation that drives synergies across verticals...",
+    "metadata": {"url": null, "timestamp": null, "author": null},
+    "label": "corporate_ai"
+  },
+
+  {
+    "id": "s013",
+    "type": "text",
+    "text": "Unë sot dola në treg dhe pashë që çmimet ishin shumë më të larta se dje...",
+    "metadata": {"language": "sq"},
+    "label": "human_albanian"
+  },
+
+  {
+    "id": "s014",
+    "type": "text",
+    "text": "New leaked report shows dangerous increase in 5G mind-control rays...",
+    "metadata": {"url": null},
+    "label": "misinfo_5g"
+  },
+
+  {
+    "id": "s015",
+    "type": "text",
+    "text": "The global market capitalization reached 120 trillion...",
+    "metadata": {"timestamp": "2024-01-02"},
+    "label": "financial_news"
+  },
+
+  {
+    "id": "s016",
+    "type": "text",
+    "text": "Our sources in the ministry confirmed that the new war starts next week...",
+    "metadata": {},
+    "label": "dangerous_rumor"
+  },
+
+  {
+    "id": "s017",
+    "type": "text",
+    "text": "Cats have 32 muscles in each ear.",
+    "metadata": {},
+    "label": "fun_fact_true"
+  },
+
+  {
+    "id": "s018",
+    "type": "text",
+    "text": "Cats secretly control the government.",
+    "metadata": {},
+    "label": "fun_fact_false"
+  },
+
+  {
+    "id": "s019",
+    "type": "text",
+    "text": "BREAKING: Major earthquake predicted for Tirana tomorrow.",
+    "metadata": {"url": null},
+    "label": "harmful_false_warning"
+  },
+
+  {
+    "id": "s020",
+    "type": "text",
+    "text": "We visited the mountain today and saw snow for the first time this year.",
+    "metadata": {"author": "Ardi"},
+    "label": "personal_human_story"
+  }
+]
