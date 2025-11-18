@@ -1,7 +1,9 @@
-✅ README.md — Slop Detector: Cross-Media AI, Misinformation & Manipulation Detection
-Overview
+# Slop Detector: Cross-Media AI, Misinformation & Manipulation Detection
 
-https://github.com/KleaTomorri/ai-genesis/blob/main/OPUS%20COVER.webp?raw=true
+
+# OVERVIEW 👇
+
+
 
 Slop Detector is a full end-to-end Intake → Understand → Decide → Review → Deliver automation built using Opus, designed to detect:
 
