@@ -1,0 +1,73 @@
+{
+  "weights": {
+    "ai_likelihood": 0.35,
+    "linguistic_anomaly": 0.15,
+    "misinformation_risk": 0.20,
+    "manipulation_likelihood": 0.10,
+    "fact_check_false_ratio": 0.15,
+    "missing_metadata_penalty": 0.05,
+    "virality_score": 0.10
+  },
+
+  "normalization": {
+    "ai_likelihood": "0-1",
+    "linguistic_anomaly": "0-1",
+    "misinformation_risk": "0-1",
+    "manipulation_likelihood": "0-1",
+    "fact_check_false_ratio": "0-1",
+    "missing_metadata_penalty": "0-5",
+    "virality_score": "0-100"
+  },
+
+  "penalties": {
+    "missing_metadata": {
+      "timestamp_missing": 2,
+      "source_missing": 3,
+      "author_missing": 1,
+      "location_missing": 1
+    },
+    "manipulated_image_detected": 10,
+    "high_slop_penalty": 7
+  },
+
+  "scoring_formula": {
+    "method": "weighted_sum",
+    "normalize_to": "0-100",
+    "description": "Score = Σ(weight_i × feature_i_normalized) − penalties"
+  },
+
+  "thresholds": {
+    "safe_upper_limit": 30,
+    "review_required_minimum": 31,
+    "review_required_maximum": 59,
+    "high_risk_minimum": 60
+  },
+
+  "escalation_logic": {
+    "auto_escalate": {
+      "conditions": [
+        {
+          "field": "manipulation_likelihood",
+          "operator": ">",
+          "value": 0.65
+        },
+        {
+          "field": "ai_likelihood",
+          "operator": ">",
+          "value": 0.85
+        },
+        {
+          "field": "fact_check_false_ratio",
+          "operator": ">",
+          "value": 0.40
+        }
+      ]
+    }
+  },
+
+  "final_decision_mapping": {
+    "0-30": "SAFE",
+    "31-59": "REVIEW",
+    "60-100": "HIGH_RISK"
+  }
+}

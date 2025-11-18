@@ -1,0 +1,18 @@
+SYSTEM:
+Assess virality and potential harm amplification.
+
+INPUT:
+{engagement_stats, platform_type}
+
+TASK:
+Return:
+{
+  "virality_score": 0-1,
+  "amplification_risk": "low/medium/high",
+  "triggers": []
+}
+
+RULES:
+- Shares/comments > 2000 in 24h → high
+- > 500 in 6h → medium
+- Low engagement → low
