@@ -1,6 +1,8 @@
 AI-Genesis-Hackathon-Project
 OPUS Workflow Automation
-Overview
+Overview!
+(https://github.com/user-attachments/assets/b73b50e9-022a-413c-b1e9-2b7decbe6275)
+
 
 This repository contains a complete OPUS workflow for multi-format data ingestion, text and image analysis, metadata and claim verification, risk scoring, and automated decision routing. The workflow integrates external data and supports automated, agentic, and human review paths. All prompts, configuration files, scripts, and workflow details are included.
 Workflow Structure
